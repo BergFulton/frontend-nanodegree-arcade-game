@@ -3,7 +3,12 @@ var Enemy = function(x, y) {
     this.x = x;
     this.y = y;
 
-    this.velocity = Math.floor((Math.random()* 5) + 1);
+    //Save the original position as startX and startY 
+    //so bugs stream constantly. 
+    this.startX = x;
+    this.startY = y;
+
+    this.velocity = Math.floor((Math.random()* 5) + 1.5);
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -27,9 +32,15 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-var enemy1 = new Enemy(202, 120, this.speed);
-var enemy2 = new Enemy(202, 350, this.speed);
-var enemy3 = new Enemy (202, 260, this.speed);
+var enemy1 = new Enemy(100, 120, this.velocity);
+var enemy2 = new Enemy(180, 200, this.velocity);
+var enemy3 = new Enemy (100, 220, this.velocity);
+
+Enemy.prototype.reset = function () {
+    this.x = this.startX;
+    this.y= this.startY;
+    this.sprite = 'images/enemy-bug.png';
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -44,7 +55,7 @@ var Player = function(x, y) {
 Player.prototype.update = function(dt) {
     this.x = this.x + (this.speed * dt);
     if (this.x > 505) {
-        this.reset();
+        // this.reset();
     }
 };
 
@@ -72,5 +83,5 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    // player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.keyCode]);
 });
