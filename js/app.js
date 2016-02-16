@@ -1,8 +1,9 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+var Enemy = function(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 300;
+
+    this.velocity = Math.floor((Math.random()* 5) + 1);
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -14,10 +15,12 @@ var Enemy = function(x, y, speed) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    this.x = this.x + (this.speed * dt);
-    if (this.x > 505) {
-     this.reset();
- };
+    //this line with help from 
+    // http://tonirib.github.io/frontend-nanodegree-arcade-game/
+    this.x = this.x + 120 * dt * this.velocity;
+    if (this.x > 750){
+        this.reset();
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -33,8 +36,8 @@ var enemy3 = new Enemy (202, 260, this.speed);
 // a handleInput() method.
 
 var Player = function(x, y) {
-    this.x = 100;
-    this.y = 200;
+    this.x = x;
+    this.y = y;
     this.sprite = 'images/char-cat-girl.png';
 };
 
