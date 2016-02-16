@@ -32,9 +32,9 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-var enemy1 = new Enemy(100, 120, this.velocity);
-var enemy2 = new Enemy(180, 200, this.velocity);
-var enemy3 = new Enemy (100, 220, this.velocity);
+var enemy1 = new Enemy(-20, 220, this.velocity);
+var enemy2 = new Enemy(-20, 145, this.velocity);
+var enemy3 = new Enemy (-20, 60, this.velocity);
 
 Enemy.prototype.reset = function () {
     this.x = this.startX;
