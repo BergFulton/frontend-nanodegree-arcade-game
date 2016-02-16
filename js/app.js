@@ -33,8 +33,8 @@ var enemy3 = new Enemy (202, 260, this.speed);
 // a handleInput() method.
 
 var Player = function(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = 100;
+    this.y = 200;
     this.sprite = 'images/char-cat-girl.png';
 };
 
@@ -57,7 +57,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 
 var allEnemies = [enemy1, enemy2, enemy3];
-var player = new Player (-400, 220);
+var player = new Player (100, 200);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
