@@ -53,10 +53,6 @@ var Player = function(x, y) {
 };
 
 Player.prototype.update = function(dt) {
-    this.x = this.x + (this.speed * dt);
-    if (this.x > 505) {
-        // this.reset();
-    }
 };
 
 Player.prototype.render = function() {
