@@ -51,7 +51,7 @@ var Player = function(x, y) {
     this.x = 200;
     this.y = 430;
 
-    //Saves the original start position for reset. 
+    //Saves the original start position for use in reset. 
     this.startX = x;
     this.startY = y;
 
