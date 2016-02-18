@@ -4,7 +4,7 @@ var Enemy = function(x, y) {
     this.y = y;
 
     //Save the original position as startX and startY 
-    //so bugs stream constantly. 
+    //so bugs stream constantly by resetting to their original position. 
     this.startX = x;
     this.startY = y;
 
@@ -47,8 +47,16 @@ Enemy.prototype.reset = function () {
 // a handleInput() method.
 
 var Player = function(x, y) {
-    this.x = x;
-    this.y = y;
+    //Starts the player at the center square at bottom.
+    this.x = 200;
+    this.y = 430;
+
+    //Saves the original start position for reset. 
+    this.startX = x;
+    this.startY = y;
+
+
+    //This sets the player avatar.
     this.sprite = 'images/char-cat-girl.png';
 };
 
