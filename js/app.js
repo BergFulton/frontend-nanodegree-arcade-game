@@ -48,8 +48,8 @@ Enemy.prototype.reset = function () {
 
 var Player = function(x, y) {
     //Starts the player at the center square at bottom.
-    this.x = 200;
-    this.y = 430;
+    this.x = x;
+    this.y = y;
 
     //Saves the original start position for use in reset. 
     this.startX = x;
@@ -60,11 +60,24 @@ var Player = function(x, y) {
     this.sprite = 'images/char-cat-girl.png';
 };
 
-Player.prototype.update = function(dt) {
+Player.prototype.update = function() {
 };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);  
+};
+
+Player.prototype.handleInput = function(allowedKeys) {
+   switch (allowedKeys) {
+    case 'left': if (this.x > 0){this.x = this.x - 101;}
+        break;
+        case 'right': if (this.x < 404) {this.x = this.x + 101}
+        break;
+        case 'up': this.y = this.y - 75;
+        break;
+        case 'down': if(this.y < 375){this.y = this.y + 75;}
+        break;
+   }
 };
 
 
@@ -75,7 +88,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 
 var allEnemies = [enemy1, enemy2, enemy3];
-var player = new Player (100, 200);
+var player = new Player (202, 420);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
