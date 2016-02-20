@@ -91,11 +91,11 @@ Player.prototype.handleInput = function(allowedKeys) {
             this.x = this.x + 101}
         break;
         
-        //If the player's y position is > 35, it means the player
+        //If the player's y position is > 50, it means the player
         //is not in the water portion, and therefore hasn't won.
         case 'up':
-            if (this.y > 35) {
-                this.y = this.y - 75;
+            if (this.y > 50) {
+                this.y = this.y - 70;
             } 
         //If the player's y position is < 35, it means the player
         //has won and can reset. 
