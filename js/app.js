@@ -8,7 +8,7 @@ var Enemy = function(x, y) {
     this.startX = x;
     this.startY = y;
 
-    this.velocity = Math.floor((Math.random()* 5) + 1.5);
+    this.velocity = Math.floor((Math.random()* 5) + 1);
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -23,18 +23,25 @@ Enemy.prototype.update = function(dt) {
     //this line with help from 
     // http://tonirib.github.io/frontend-nanodegree-arcade-game/
     this.x = this.x + 120 * dt * (this.velocity);
-    if (this.x > 750){
+
+    //Collisions
+    if (this.y == player.y && (this.x > player.x - 50 && this.x < player.x + 50)) 
+        {console.log("collision!");
+    };
+
+    //When the bug goes off the screen- further than 650
+    //on the x axis, it resets.
+    if (this.x > 650){
         this.reset();
     }
+
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-var enemy1 = new Enemy(-20, 220, this.velocity);
-var enemy2 = new Enemy(-20, 145, this.velocity);
-var enemy3 = new Enemy (-20, 60, this.velocity);
+
 
 Enemy.prototype.reset = function () {
     this.x = this.startX;
@@ -47,7 +54,7 @@ Enemy.prototype.reset = function () {
 // a handleInput() method.
 
 var Player = function(x, y) {
-    //Starts the player at the center square at bottom.
+
     this.x = x;
     this.y = y;
 
@@ -60,7 +67,7 @@ var Player = function(x, y) {
     this.sprite = 'images/char-cat-girl.png';
 };
 
-Player.prototype.update = function() {
+Player.prototype.update = function() { 
 };
 
 Player.prototype.render = function() {
@@ -74,22 +81,32 @@ Player.prototype.reset = function() {
 }
 
 Player.prototype.handleInput = function(allowedKeys) {
+   //This sets the boundaries for the player. 
    switch (allowedKeys) {
-        case 'left': if (this.x > 0){this.x = this.x - 101;}
+        case 'left': if (this.x > 0){
+            this.x = this.x - 101;}
+        break;
+                
+        case 'right': if (this.x < 404) {
+            this.x = this.x + 101}
         break;
         
-        case 'right': if (this.x < 404) {this.x = this.x + 101}
-        break;
-        
+        //If the player's y position is > 35, it means the player
+        //is not in the water portion, and therefore hasn't won.
         case 'up':
             if (this.y > 35) {
                 this.y = this.y - 75;
-            } else {
+            } 
+        //If the player's y position is < 35, it means the player
+        //has won and can reset. 
+            else {
+                alert("w00t!");
                 player.reset();
             }
         break;
 
-        case 'down': if(this.y < 375){this.y = this.y + 75;}
+        case 'down': if(this.y < 375){
+            this.y = this.y + 75;}
         break;
    }
 };
@@ -98,11 +115,31 @@ Player.prototype.handleInput = function(allowedKeys) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [enemy1, enemy2, enemy3];
+var allEnemies = [];
+
+//Three horizontal positions that are possible for the bugs 
+//to move in. These are the gray blocks. 
+
+var vertPos = [220, 140, 60];
+
+//Create different enemies. 
+for (var i = 0; i < 3; i++) {
+    var x = Math.floor((Math.random() * 5 + 1));
+
+    var y = vertPos[Math.floor(Math.random()* 3)];
+
+    var enemy = new Enemy(x, y);
+
+    allEnemies.push(enemy);
+}
+
+
+//Instantiates the new player in the center bottom tile. 
+
 var player = new Player (202, 420);
 
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
