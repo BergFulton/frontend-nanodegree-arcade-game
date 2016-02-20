@@ -22,7 +22,7 @@ var Enemy = function(x, y) {
 Enemy.prototype.update = function(dt) {
     //this line with help from 
     // http://tonirib.github.io/frontend-nanodegree-arcade-game/
-    this.x = this.x + 120 * dt * this.velocity;
+    this.x = this.x + 120 * dt * (this.velocity);
     if (this.x > 750){
         this.reset();
     }
@@ -67,21 +67,32 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);  
 };
 
+Player.prototype.reset = function() {
+    this.x = this.startX;
+    this.y= this.startY;
+    this.sprite = 'images/char-cat-girl.png';
+}
+
 Player.prototype.handleInput = function(allowedKeys) {
    switch (allowedKeys) {
-    case 'left': if (this.x > 0){this.x = this.x - 101;}
+        case 'left': if (this.x > 0){this.x = this.x - 101;}
         break;
+        
         case 'right': if (this.x < 404) {this.x = this.x + 101}
         break;
-        case 'up': this.y = this.y - 75;
+        
+        case 'up':
+            if (this.y > 35) {
+                this.y = this.y - 75;
+            } else {
+                player.reset();
+            }
         break;
+
         case 'down': if(this.y < 375){this.y = this.y + 75;}
         break;
    }
 };
-
-
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
