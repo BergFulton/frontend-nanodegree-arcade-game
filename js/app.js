@@ -122,7 +122,7 @@ var allEnemies = [];
 
 var vertPos = [220, 140, 60];
 
-//Create different enemies. 
+//Create different enemies with different properties. 
 for (var i = 0; i < 3; i++) {
     var x = Math.floor((Math.random() * 5 + 1));
 
@@ -130,11 +130,13 @@ for (var i = 0; i < 3; i++) {
 
     var enemy = new Enemy(x, y);
 
+//Now push those bugs in to the allEnemies array!
     allEnemies.push(enemy);
 }
 
 
-//Instantiates the new player in the center bottom tile. 
+//Instantiates the new player in the center bottom tile.
+//When player.reset is called, it goes back to this position. 
 
 var player = new Player (202, 420);
 
