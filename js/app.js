@@ -31,21 +31,21 @@ Enemy.prototype.update = function(dt) {
     // http://tonirib.github.io/frontend-nanodegree-arcade-game/
     this.x = this.x + 120 * dt * (this.velocity);
 
-    // Collisions
-    // This code with help from https://www.youtube.com/watch?v=rqEJ7WiLWdo
-
-    if ( (this.x + this.width >= player.x && this.x <= player.x + player.width) 
-        && (this.y >= player.y && this.y <= player.y + player.height) ) {
-        player.reset();
-        alert('Oh noes! You\'ve died!');
-    }
-
     // When the bug goes off the screen- further than 650
     // on the x axis, it resets.
     if (this.x > 650){
         this.reset();
     }
 
+    // Collisions
+    // This code with help from https://www.youtube.com/watch?v=rqEJ7WiLWdo
+
+    if ( (this.x + this.width >= player.x && this.x <= player.x + player.width) 
+        && (this.y >= player.y && this.y <= player.y + player.height) ) {
+        player.lives - 1;
+        player.reset();
+        alert('Oh noes! You\'ve died!');
+    };
 };
 
 // Draw the enemy on the screen.
@@ -79,6 +79,9 @@ var Player = function(x, y) {
     // It matters for collision detection. 
     this.height = 81;
     this.width = 68;
+
+    // CatGirl gets 9 Lives to start with.
+    this.lives = 9; 
 };
 
 Player.prototype.update = function() { 
