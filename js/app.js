@@ -50,7 +50,7 @@ Enemy.prototype.reset = function () {
     this.x = x;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
-}
+};
 
 // PLAYER CLASS 
 
@@ -86,7 +86,7 @@ Player.prototype.reset = function() {
     this.x = this.startX;
     this.y= this.startY;
     this.sprite = 'images/char-cat-girl.png';
-}
+};
 
 // This sets the boundaries of the playing field. The player
 // is not able to move beyond the boundaries of the board. 
@@ -142,7 +142,7 @@ for (var i = 0; i < 3; i++) {
 
 // Now push those bugs in to the allEnemies array!
     allEnemies.push(enemy);
-}
+};
 
 
 // Instantiates the new player in the center bottom tile.
