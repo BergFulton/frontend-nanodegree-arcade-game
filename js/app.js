@@ -42,7 +42,6 @@ Enemy.prototype.update = function(dt) {
 
     if ( (this.x + this.width >= player.x && this.x <= player.x + player.width) 
         && (this.y >= player.y && this.y <= player.y + player.height) ) {
-        player.lives - 1;
         player.reset();
         alert('Oh noes! You\'ve died!');
     };
